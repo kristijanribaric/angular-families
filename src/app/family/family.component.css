@@ -1,0 +1,11 @@
+.members p {
+  display: inline;
+}
+
+.members p::after {
+  content: ", ";
+}
+
+.members p:last-child::after {
+  content: "";
+}
