@@ -1,12 +1,12 @@
 <div class="shadow p-3 mb-5 bg-light rounded container w-75">
   <div class="d-flex justify-content-between align-items-center">
-    <h2>{{ lastName }}</h2>
+    <h2>{{ family?.lastName }}</h2>
     <button (click)="deleteFamily()" class="btn-close"></button>
   </div>
 
   <div class="members">
-    <p *ngFor="let member of members">
-      {{ member }}
+    <p *ngFor="let member of family?.familyMembers">
+      {{member.constructor.name}} {{ member.toString() }}
     </p>
   </div>
 </div>

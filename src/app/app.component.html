@@ -1,4 +1,4 @@
 <app-form></app-form>
 <div *ngFor="let family of families | keyvalue">
-  <app-family [lastName]="family.key" [members]="family.value"></app-family>
+  <app-family [family]="family.value"></app-family>
 </div>
