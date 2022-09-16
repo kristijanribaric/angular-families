@@ -1,0 +1,15 @@
+<div>
+  <p
+    class="highlight"
+    [ngClass]="_highlight ? 'highlight-animation-a' : 'highlight-animation-b'"
+  >
+    {{name}}
+  </p>
+  <button class="btn btn-light" (click)="highlightNeighbor(index! - 1)">
+    ←
+  </button>
+  <button class="btn btn-light" (click)="highlight()">·</button>
+  <button class="btn btn-light" (click)="highlightNeighbor(index! + 1)">
+    →
+  </button>
+</div>

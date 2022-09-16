@@ -1,0 +1,41 @@
+p {
+  display: inline;
+  margin-right: 5px;
+}
+
+button {
+  font-size: 1.4rem;
+  padding: 0;
+}
+
+button:nth-child(3) {
+  padding: 0 0.5rem;
+}
+
+.highlight.highlight-animation-a {
+  animation: highlight-a 1s ease;
+}
+@keyframes highlight-a {
+  from {
+    background: red;
+    color: white;
+  }
+  to {
+    background: white;
+    color: black;
+  }
+}
+
+.highlight.highlight-animation-b {
+  animation: highlight-b 1s ease;
+}
+@keyframes highlight-b {
+  from {
+    background: red;
+    color: white;
+  }
+  to {
+    background: white;
+    color: black;
+  }
+}

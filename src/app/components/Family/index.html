@@ -1,12 +1,41 @@
 <div class="shadow p-3 mb-5 bg-light rounded container w-75">
   <div class="d-flex justify-content-between align-items-center">
-    <h2>{{ family?.lastName }}</h2>
+    <div>
+      <h2>{{ family?.lastName }}</h2>
+      <button (click)="highlightAll()" class="btn btn-secondary">
+        Highlight all
+      </button>
+    </div>
+
     <button (click)="deleteFamily()" class="btn-close"></button>
   </div>
 
   <div class="members">
-    <p *ngFor="let member of family?.familyMembers">
-      {{member.constructor.name}} {{ member.toString() }}
-    </p>
+    <ng-container
+      *ngFor="let member of family?.familyMembers; let i = index"
+      [ngSwitch]="member.constructor.name"
+    >
+      <app-father
+        #child
+        [index]="i"
+        [member]="member"
+        (highlightChange)="handleHighlightChange($event)"
+        *ngSwitchCase="'Father'"
+      ></app-father>
+      <app-mother
+        #child
+        [index]="i"
+        [member]="member"
+        (highlightChange)="handleHighlightChange($event)"
+        *ngSwitchCase="'Mother'"
+      ></app-mother>
+      <app-child
+        #child
+        [index]="i"
+        [member]="member"
+        (highlightChange)="handleHighlightChange($event)"
+        *ngSwitchCase="'Child'"
+      ></app-child>
+    </ng-container>
   </div>
 </div>

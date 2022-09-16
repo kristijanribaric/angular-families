@@ -104,7 +104,6 @@ export class FamiliesParserService {
       }),
       map((familyMembers) => {
         const family = new Family(familyMembers);
-
         return family;
       }),
       distinctUntilChanged(

@@ -1,5 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
+import { FamilyComponent } from './components';
 import { FamilyMemberBase, Family } from './data';
 import { FamiliesService } from './services/FamiliesService';
 @Component({
@@ -13,7 +20,8 @@ export class AppComponent implements OnInit, OnDestroy {
   //   this.familiesService.familiesObservable.subscribe();
   familiesSub?: Subscription;
   membersWithValuesSub?: Subscription;
-
+  @ViewChildren(FamilyComponent)
+  familiesComponents?: QueryList<FamilyComponent>;
   constructor(private familiesService: FamiliesService) {}
 
   ngOnInit(): void {
@@ -21,7 +29,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.familiesSub = this.familiesService.familiesObservable.subscribe(
       (family) => {
-        console.log('family', family);
         this.families[family.lastName] = family;
       },
       (error) => {
@@ -33,7 +40,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.membersWithValuesSub =
       this.familiesService.membersWithValuesObservable.subscribe(
         (newMember: FamilyMemberBase) => {
-          console.log('member', newMember);
           const familyMembers = this.families[newMember.lastName].familyMembers;
           const index = familyMembers.findIndex(
             (member) =>
@@ -51,5 +57,11 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.familiesSub?.unsubscribe();
     this.membersWithValuesSub?.unsubscribe();
+  }
+
+  highlightAll() {
+    for (const family of this.familiesComponents?.toArray() || []) {
+      family.highlightAll();
+    }
   }
 }
