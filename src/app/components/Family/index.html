@@ -15,27 +15,63 @@
       *ngFor="let member of family?.familyMembers; let i = index"
       [ngSwitch]="member.constructor.name"
     >
-      <app-father
-        #child
-        [index]="i"
-        [member]="member"
-        (highlightChange)="_handleHighlightChange($event)"
-        *ngSwitchCase="'Father'"
-      ></app-father>
-      <app-mother
-        #child
-        [index]="i"
-        [member]="member"
-        (highlightChange)="_handleHighlightChange($event)"
-        *ngSwitchCase="'Mother'"
-      ></app-mother>
-      <app-child
-        #child
-        [index]="i"
-        [member]="member"
-        (highlightChange)="_handleHighlightChange($event)"
-        *ngSwitchCase="'Child'"
-      ></app-child>
+      <app-father #child [member]="member" *ngSwitchCase="'Father'"
+        ><button
+          [disabled]="i === 0"
+          class="btn btn-light"
+          (click)="_handleHighlightChange(i - 1)"
+        >
+          ←
+        </button>
+        <button class="btn btn-light" (click)="_handleHighlightChange(i)">
+          ·
+        </button>
+        <button
+          [disabled]="i -1 === family?.familyMembers?.length"
+          class="btn btn-light"
+          (click)="_handleHighlightChange(i + 1)"
+        >
+          →
+        </button></app-father
+      >
+      <app-mother #child [member]="member" *ngSwitchCase="'Mother'">
+        <button
+          [disabled]="i === 0"
+          class="btn btn-light"
+          (click)="_handleHighlightChange(i - 1)"
+        >
+          ←
+        </button>
+        <button class="btn btn-light" (click)="_handleHighlightChange(i)">
+          ·
+        </button>
+        <button
+          [disabled]="i -1 === family?.familyMembers?.length"
+          class="btn btn-light"
+          (click)="_handleHighlightChange(i + 1)"
+        >
+          →
+        </button></app-mother
+      >
+      <app-child #child [member]="member" *ngSwitchCase="'Child'">
+        <button
+          [disabled]="i === 0"
+          class="btn btn-light"
+          (click)="_handleHighlightChange(i - 1)"
+        >
+          ←
+        </button>
+        <button class="btn btn-light" (click)="_handleHighlightChange(i)">
+          ·
+        </button>
+        <button
+          [disabled]="i + 1 === family?.familyMembers?.length"
+          class="btn btn-light"
+          (click)="_handleHighlightChange(i + 1)"
+        >
+          →
+        </button></app-child
+      >
     </ng-container>
   </div>
 </div>

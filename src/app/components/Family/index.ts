@@ -16,7 +16,7 @@ export class FamilyComponent {
   }
 
   _handleHighlightChange(index: number) {
-    const member = this.familyMembers?.find((member) => member.index === index);
+    const member = this.familyMembers?.toArray()[index];
     member?.highlight();
   }
 

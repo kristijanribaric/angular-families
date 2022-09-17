@@ -7,9 +7,9 @@ import { FamilyMemberBase } from 'src/app/data';
   styleUrls: ['./style.css'],
 })
 export class FamilyMemberComponent {
-  @Input() index?: number;
+  // @Input() index?: number;
   @Input() member?: FamilyMemberBase;
-  @Output() highlightChange = new EventEmitter<number>();
+  // @Output() highlightChange = new EventEmitter<number>();
   _highlight = false;
 
   constructor() {}
@@ -22,7 +22,7 @@ export class FamilyMemberComponent {
     this._highlight = !this._highlight;
   }
 
-  _highlightNeighbor(neighborIndex: number) {
-    this.highlightChange.emit(neighborIndex);
-  }
+  // _highlightNeighbor(neighborIndex: number) {
+  //   this.highlightChange.emit(neighborIndex);
+  // }
 }
