@@ -1,9 +1,9 @@
 <app-form></app-form>
-<div *ngIf="(families | json) != '{}'" class="container w-75 mb-2">
+<div *ngIf="(_families | json) != '{}'" class="container w-75 mb-2">
   <button (click)="highlightAll()" class="btn btn-primary">
     Highlight all Families
   </button>
 </div>
-<div *ngFor="let family of families | keyvalue">
+<div *ngFor="let family of _families | keyvalue">
   <app-family [family]="family.value"></app-family>
 </div>

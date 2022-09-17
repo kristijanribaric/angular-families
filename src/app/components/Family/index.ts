@@ -10,12 +10,12 @@ import { FamilyMemberComponent } from '../FamilyMember';
 export class FamilyComponent {
   @Input() family?: Family;
   @ViewChildren('child') familyMembers?: QueryList<FamilyMemberComponent>;
-  constructor(private familiesService: FamiliesService) {}
-  deleteFamily() {
-    this.family && this.familiesService.deleteFamily(this.family.lastName);
+  constructor(private _familiesService: FamiliesService) {}
+  _deleteFamily() {
+    this.family && this._familiesService.deleteFamily(this.family.lastName);
   }
 
-  handleHighlightChange(index: number) {
+  _handleHighlightChange(index: number) {
     const member = this.familyMembers?.find((member) => member.index === index);
     member?.highlight();
   }

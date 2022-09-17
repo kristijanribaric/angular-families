@@ -7,7 +7,7 @@
       </button>
     </div>
 
-    <button (click)="deleteFamily()" class="btn-close"></button>
+    <button (click)="_deleteFamily()" class="btn-close"></button>
   </div>
 
   <div class="members">
@@ -19,21 +19,21 @@
         #child
         [index]="i"
         [member]="member"
-        (highlightChange)="handleHighlightChange($event)"
+        (highlightChange)="_handleHighlightChange($event)"
         *ngSwitchCase="'Father'"
       ></app-father>
       <app-mother
         #child
         [index]="i"
         [member]="member"
-        (highlightChange)="handleHighlightChange($event)"
+        (highlightChange)="_handleHighlightChange($event)"
         *ngSwitchCase="'Mother'"
       ></app-mother>
       <app-child
         #child
         [index]="i"
         [member]="member"
-        (highlightChange)="handleHighlightChange($event)"
+        (highlightChange)="_handleHighlightChange($event)"
         *ngSwitchCase="'Child'"
       ></app-child>
     </ng-container>

@@ -13,27 +13,27 @@ export class FormComponent implements OnInit, OnDestroy {
     members: new FormControl(''),
   });
 
-  errorSubscription?: Subscription;
-  error: string | null = null;
-  constructor(private familiesService: FamiliesService) {}
+  _errorSubscription?: Subscription;
+  _error: string | null = null;
+  constructor(private _familiesService: FamiliesService) {}
 
   ngOnInit(): void {
-    this.errorSubscription = this.familiesService.errorSubject.subscribe(
+    this._errorSubscription = this._familiesService.errorSubject.subscribe(
       (error) => {
-        this.error = error;
+        this._error = error;
       }
     );
   }
-  onSubmit() {
+  _onSubmit() {
     const members = this.membersForm.value.members;
 
     if (members) {
-      this.familiesService.addToFamily(members);
+      this._familiesService.addToFamily(members);
     }
     this.membersForm.reset();
   }
 
   ngOnDestroy() {
-    this.errorSubscription?.unsubscribe();
+    this._errorSubscription?.unsubscribe();
   }
 }

@@ -14,7 +14,7 @@ export class FamilyMemberComponent {
 
   constructor() {}
 
-  get name() {
+  get _name() {
     return this.member?.toString();
   }
 
@@ -22,7 +22,7 @@ export class FamilyMemberComponent {
     this._highlight = !this._highlight;
   }
 
-  highlightNeighbor(neighborIndex: number) {
+  _highlightNeighbor(neighborIndex: number) {
     this.highlightChange.emit(neighborIndex);
   }
 }

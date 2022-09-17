@@ -15,52 +15,53 @@ import { FamiliesService } from './services/FamiliesService';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit, OnDestroy {
-  families: Record<string, Family> = {};
+  _families: Record<string, Family> = {};
   // familyMembersSub: Subscription =
   //   this.familiesService.familiesObservable.subscribe();
-  familiesSub?: Subscription;
-  membersWithValuesSub?: Subscription;
+  _familiesSub?: Subscription;
+  _membersWithValuesSub?: Subscription;
   @ViewChildren(FamilyComponent)
-  familiesComponents?: QueryList<FamilyComponent>;
+  _familiesComponents?: QueryList<FamilyComponent>;
   constructor(private familiesService: FamiliesService) {}
 
   ngOnInit(): void {
-    this.families = this.familiesService.families;
+    this._families = this.familiesService.families;
 
-    this.familiesSub = this.familiesService.familiesObservable.subscribe(
-      (family) => {
-        this.families[family.lastName] = family;
+    this._familiesSub = this.familiesService.familiesObservable.subscribe({
+      next: (family) => {
+        this._families[family.lastName] = family;
       },
-      (error) => {
+      error: (error) => {
         console.log(error.message);
         this.familiesService.errorSubject.next(error.message);
-      }
-    );
+      },
+    });
 
-    this.membersWithValuesSub =
-      this.familiesService.membersWithValuesObservable.subscribe(
-        (newMember: FamilyMemberBase) => {
-          const familyMembers = this.families[newMember.lastName].familyMembers;
+    this._membersWithValuesSub =
+      this.familiesService.membersWithValuesObservable.subscribe({
+        next: (newMember: FamilyMemberBase) => {
+          const familyMembers =
+            this._families[newMember.lastName].familyMembers;
           const index = familyMembers.findIndex(
             (member) =>
               newMember.firstName === member.firstName &&
               newMember.lastName === member.lastName
           );
           if (index !== -1) {
-            this.families[newMember.lastName].familyMembers[index] = newMember;
+            this._families[newMember.lastName].familyMembers[index] = newMember;
           }
         },
-        (error) => {}
-      );
+        error: (error) => {},
+      });
   }
 
   ngOnDestroy() {
-    this.familiesSub?.unsubscribe();
-    this.membersWithValuesSub?.unsubscribe();
+    this._familiesSub?.unsubscribe();
+    this._membersWithValuesSub?.unsubscribe();
   }
 
   highlightAll() {
-    for (const family of this.familiesComponents?.toArray() || []) {
+    for (const family of this._familiesComponents?.toArray() || []) {
       family.highlightAll();
     }
   }
