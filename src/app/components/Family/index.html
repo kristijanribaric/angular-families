@@ -12,12 +12,12 @@
 
   <div class="members">
     <ng-container
-      *ngFor="let member of family?.familyMembers; let i = index"
+      *ngFor="let member of family?.familyMembers; let i = index; let isFirst= first; let isLast = last"
       [ngSwitch]="member.constructor.name"
     >
       <app-father #child [member]="member" *ngSwitchCase="'Father'"
         ><button
-          [disabled]="i === 0"
+          [disabled]="isFirst"
           class="btn btn-light"
           (click)="_handleHighlightChange(i - 1)"
         >
@@ -27,7 +27,7 @@
           ·
         </button>
         <button
-          [disabled]="i -1 === family?.familyMembers?.length"
+          [disabled]="isLast"
           class="btn btn-light"
           (click)="_handleHighlightChange(i + 1)"
         >
@@ -36,7 +36,7 @@
       >
       <app-mother #child [member]="member" *ngSwitchCase="'Mother'">
         <button
-          [disabled]="i === 0"
+          [disabled]="isFirst"
           class="btn btn-light"
           (click)="_handleHighlightChange(i - 1)"
         >
@@ -46,7 +46,7 @@
           ·
         </button>
         <button
-          [disabled]="i -1 === family?.familyMembers?.length"
+          [disabled]="isLast"
           class="btn btn-light"
           (click)="_handleHighlightChange(i + 1)"
         >
@@ -55,7 +55,7 @@
       >
       <app-child #child [member]="member" *ngSwitchCase="'Child'">
         <button
-          [disabled]="i === 0"
+          [disabled]="isFirst"
           class="btn btn-light"
           (click)="_handleHighlightChange(i - 1)"
         >
@@ -65,7 +65,7 @@
           ·
         </button>
         <button
-          [disabled]="i + 1 === family?.familyMembers?.length"
+          [disabled]="isLast"
           class="btn btn-light"
           (click)="_handleHighlightChange(i + 1)"
         >
