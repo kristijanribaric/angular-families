@@ -29,7 +29,7 @@ export const getFamilyMemberValuesWrapper = (
 ) => {
   getFamilyMemberValues(
     data,
-    previousMember ? { value: previousMember.value } : null,
+    previousMember ? { value: previousMember.value! } : null,
     (data: FamilyMemberUpdateOutputValues) => {
       callback({ familyMember: currentFamilyMember, value: data.value });
     }

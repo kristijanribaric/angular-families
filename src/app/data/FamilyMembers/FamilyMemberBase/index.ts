@@ -7,14 +7,14 @@ export abstract class FamilyMemberBase {
 
   private _firstName: string;
   private _lastName: string;
-  protected _value?: number;
+  protected _value?: number | undefined;
 
   constructor(data: { firstName: string; lastName: string }) {
     this._firstName = data.firstName;
     this._lastName = data.lastName;
   }
 
-  set value(value: number) {
+  set value(value: number | undefined) {
     this._value = value;
   }
 
@@ -27,10 +27,9 @@ export abstract class FamilyMemberBase {
   }
 
   get value() {
-    if (this._value === undefined) throw new Error("Value is not set");
     return this._value;
   }
   public toString(): string {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 }

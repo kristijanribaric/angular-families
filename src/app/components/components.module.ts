@@ -3,7 +3,11 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { ChildComponent } from './Child';
-import { FamilyComponent } from './Family';
+import {
+  FamilyComponent,
+  FamilyComponentHeaderTemplate,
+  FamilyComponentDependencies,
+} from './Family';
 import { FamilyMemberComponent } from './FamilyMember';
 import { FatherComponent } from './Father';
 import { FormComponent } from './Form';
@@ -13,6 +17,7 @@ import { MotherComponent } from './Mother';
   declarations: [
     FormComponent,
     FamilyComponent,
+    ...FamilyComponentDependencies,
     FamilyMemberComponent,
     FatherComponent,
     MotherComponent,
@@ -22,6 +27,7 @@ import { MotherComponent } from './Mother';
   exports: [
     FormComponent,
     FamilyComponent,
+    ...FamilyComponentDependencies,
     FamilyMemberComponent,
     FatherComponent,
     MotherComponent,

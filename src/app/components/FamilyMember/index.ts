@@ -8,17 +8,20 @@ import { FamilyMemberBase } from 'src/app/data';
 })
 export class FamilyMemberComponent {
   // @Input() index?: number;
-  @Input() member?: FamilyMemberBase;
-  // @Output() highlightChange = new EventEmitter<number>();
-  _highlight = false;
+  @Input()
+  public member?: FamilyMemberBase;
+  @Output()
+  public highlightChange = new EventEmitter<number>();
+
+  protected _highlight = false;
 
   constructor() {}
 
-  get _name() {
+  protected get _name() {
     return this.member?.toString();
   }
 
-  highlight() {
+  public highlight() {
     this._highlight = !this._highlight;
   }
 

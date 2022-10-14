@@ -46,7 +46,9 @@ export class Family {
         familyMembers[member.constructor.name] = [];
       }
       familyMembers[member.constructor.name].push(member);
-      valuesSum += member.value;
+      if (member.value) {
+        valuesSum += member.value;
+      }
     }
 
     // loop through hashmap and create string for each type of family member

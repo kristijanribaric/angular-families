@@ -10,7 +10,10 @@ import { FamiliesService } from '../../services/FamiliesService';
 })
 export class FormComponent implements OnInit, OnDestroy {
   _membersForm = new FormGroup({
-    members: new FormControl('', [Validators.required]),
+    members: new FormControl(
+      'Mr. Mario Mucalo, Mrs. Paola Gemić, Mrs. Ana Mucalo, Tonka Mucalo, Mr. Juraj Gemić, Lara Gemić, Toma Mucalo',
+      [Validators.required]
+    ),
   });
 
   _errorSubscription?: Subscription;

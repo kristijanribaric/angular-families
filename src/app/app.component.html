@@ -5,5 +5,15 @@
   </button>
 </div>
 <div *ngFor="let family of _families | keyvalue">
-  <app-family [family]="family.value"></app-family>
+  <app-family [family]="family.value">
+    <ng-container
+      *appFamilyHeaderTemplate="
+        let lastName;
+        let membersCount = membersCount;
+        let valueSum = valueSum
+      "
+    >
+      <h2>{{ lastName }}: {{ membersCount }} ({{ valueSum }})</h2>
+    </ng-container>
+  </app-family>
 </div>

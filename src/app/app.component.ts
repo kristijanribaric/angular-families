@@ -4,6 +4,8 @@ import {
   OnInit,
   QueryList,
   ViewChildren,
+  ContentChild,
+  TemplateRef,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FamilyComponent } from './components';
@@ -22,6 +24,7 @@ export class AppComponent implements OnInit, OnDestroy {
   _membersWithValuesSub?: Subscription;
   @ViewChildren(FamilyComponent)
   _familiesComponents?: QueryList<FamilyComponent>;
+  @ContentChild('') headerTemplate: TemplateRef<any> | null = null;
   constructor(private familiesService: FamiliesService) {}
 
   ngOnInit(): void {

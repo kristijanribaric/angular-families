@@ -5,5 +5,9 @@
   >
     {{_name}}
   </p>
-  <ng-content></ng-content>
+  <div>
+    <button class="btn btn-light" (click)="highlightChange.emit(-1)">←</button>
+    <button class="btn btn-light" (click)="highlightChange.emit(0)">·</button>
+    <button class="btn btn-light" (click)="highlightChange.emit(+1)">→</button>
+  </div>
 </div>
