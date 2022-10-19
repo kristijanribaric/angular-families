@@ -6,10 +6,10 @@ import {
   ViewChildren,
   ContentChild,
   TemplateRef,
-  ChangeDetectionStrategy,
 } from '@angular/core';
-import { Family } from 'src/app/data';
-import { FamiliesService } from '../../services/FamiliesService';
+import { Family } from '../../data';
+import { HttpService } from 'src/app/services';
+// import { FamiliesService } from '../../services/FamiliesService';
 import { FamilyMemberComponent } from '../FamilyMember';
 
 @Directive({
@@ -32,14 +32,17 @@ export class FamilyComponent {
   })
   headerTemplate: TemplateRef<FamilyComponentHeaderTemplate> | null = null;
 
-  constructor(private _familiesService: FamiliesService) {}
+  constructor(private _httpService: HttpService) {}
 
-  ngOnInit() {
-    console.log('!');
-  }
+  ngOnInit() {}
 
   _deleteFamily() {
-    this.family && this._familiesService.deleteFamily(this.family.lastName);
+    this.family &&
+      this._httpService.deleteFamily(this.family.lastName).subscribe({
+        next: () => {
+          delete this._httpService.families[this.family!.lastName];
+        },
+      });
   }
 
   _handleHighlightChange(index: number) {
@@ -59,9 +62,9 @@ export class FamilyComponent {
   }
 
   protected _valueSum() {
-    return this.family?.familyMembers.reduce((sum, member) => {
-      if (member.value) {
-        return sum + member.value;
+    return this.family?.members.reduce((sum, member) => {
+      if (member.age) {
+        return sum + member.age;
       }
       return sum;
     }, 0);

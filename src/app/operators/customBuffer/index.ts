@@ -2,7 +2,7 @@ import { Observable, OperatorFunction } from 'rxjs';
 import { operate } from 'rxjs/internal/util/lift';
 import { noop } from 'rxjs/internal/util/noop';
 import { OperatorSubscriber } from 'rxjs/internal/operators/OperatorSubscriber';
-import { FamilyMemberBase } from '../../data';
+import { FamilyMemberBase } from '../../data/Old/FamilyMembers';
 
 export function customBuffer(
   closingNotifier: Observable<{

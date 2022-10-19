@@ -4,7 +4,7 @@ import {
   getFamilyMemberValues,
   FamilyMemberUpdateOutputValues,
 } from './familyMemberUpdate';
-import { FamilyMemberBase } from '../../data';
+import { FamilyMemberBase } from '../../data/Old/FamilyMembers';
 
 export const updateFamilyMemberWrapper = (
   data: FamilyMemberUpdateInputData,

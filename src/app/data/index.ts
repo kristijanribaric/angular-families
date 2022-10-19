@@ -1,2 +1,1 @@
-export * from './FamilyMembers';
-export * from './Family';
+export * from './New';

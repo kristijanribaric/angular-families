@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-between align-items-center">
     <div>
       <ng-container
-        *ngTemplateOutlet="headerTemplate; context: { $implicit: family?.lastName, lastName: family?.lastName, membersCount: family?.familyMembers?.length, valueSum: _valueSum()}"
+        *ngTemplateOutlet="headerTemplate; context: { $implicit: family?.lastName, lastName: family?.lastName, membersCount: family?.members?.length, valueSum: _valueSum()}"
       ></ng-container>
       <button (click)="highlightAll()" class="btn btn-secondary">
         Highlight all
@@ -14,15 +14,33 @@
 
   <div class="members">
     <ng-container
-      *ngFor="let member of family?.familyMembers; let i = index; let isFirst= first; let isLast = last"
-      [ngSwitch]="member.constructor.name"
+      *ngFor="let member of family?.members; let i = index; let isFirst= first; let isLast = last"
+      [ngSwitch]="member.type"
     >
       <app-father
         #child
         [member]="member"
         (highlightChange)="_handleButtonClicked($event, i)"
         *ngSwitchCase="'Father'"
-      ></app-father>
+      >
+        <button
+          [disabled]="isFirst"
+          class="btn btn-light"
+          (click)="_handleHighlightChange(i - 1)"
+        >
+          ←
+        </button>
+        <button class="btn btn-light" (click)="_handleHighlightChange(i)">
+          ·
+        </button>
+        <button
+          [disabled]="isLast"
+          class="btn btn-light"
+          (click)="_handleHighlightChange(i + 1)"
+        >
+          →
+        </button></app-father
+      >
       <app-mother #child [member]="member" *ngSwitchCase="'Mother'">
         <button
           [disabled]="isFirst"
