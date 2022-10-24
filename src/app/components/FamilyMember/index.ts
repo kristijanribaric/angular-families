@@ -74,6 +74,7 @@ export class FamilyMemberComponent implements OnInit {
 
   protected _onSubmit() {
     const updatedMember = { ...this.member, ...this._memberForm.value };
+    console.log(updatedMember);
     if (this._memberForm.valid) {
       this._httpService
         .updateFamilyMember(updatedMember as FamilyMember)

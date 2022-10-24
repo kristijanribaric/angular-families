@@ -10,6 +10,19 @@ export class HttpService {
   public families: Record<string, Family> = {};
   constructor(private http: HttpClient) {}
 
+  private getApiRoute(memberType: string): string {
+    switch (memberType) {
+      case 'Child':
+        return 'api/Children';
+      case 'Father':
+        return 'api/Fathers';
+      case 'Mother':
+        return 'api/Mothers';
+      default:
+        return 'api/FamilyMembers';
+    }
+  }
+
   public getFamilies(): Observable<Family[]> {
     return this.http.get<Family[]>(this._url + 'api/Families');
   }
@@ -40,7 +53,7 @@ export class HttpService {
       'Content-Type': 'application/json',
     });
     return this.http.put<FamilyMember>(
-      this._url + 'api/FamilyMembers/',
+      this._url + this.getApiRoute(member.type),
       member,
       {
         headers: headers,
@@ -50,12 +63,14 @@ export class HttpService {
 
   public deleteFamilyMember(member: FamilyMember): Observable<FamilyMember> {
     return this.http.delete<FamilyMember>(
-      this._url + 'api/FamilyMembers/' + member.id
+      this._url + this.getApiRoute(member.type) + '/' + member.id
     );
   }
 
-  public getFamilyMember(id: number): Observable<FamilyMember> {
-    return this.http.get<FamilyMember>(this._url + 'api/FamilyMembers/' + id);
+  public getFamilyMember(member: FamilyMember): Observable<FamilyMember> {
+    return this.http.get<FamilyMember>(
+      this._url + this.getApiRoute(member.type) + '/' + member.id
+    );
   }
 
   public errorSubject = new Subject<string>();
